@@ -1,8 +1,23 @@
+// src/App.jsx
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./Navbar";
+import Hero from "./Hero";
+import About from "./About";
+import Projects from "./Projects";
+import Contact from "./Contact";
+
 function App() {
   return (
-    <div style={{ textAlign: 'center', marginTop: '40vh' }}>
-      <h1>Hi, I am Micheal and this is my website about me</h1>
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Hero />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </>
   );
 }
 
