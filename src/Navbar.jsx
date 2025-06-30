@@ -17,7 +17,21 @@ const Navbar = () => {
         zIndex: 1000,
       }}
     >
-      <div style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Micheal</div>
+
+      <Link
+      to="/"
+      style={{
+      fontSize: "1.25rem",
+      fontWeight: "bold",
+      color: "white",
+      textDecoration: "none",
+      cursor: "pointer",
+      }}
+      >
+      Michael
+      </Link>
+
+
 
       <ul
         style={{

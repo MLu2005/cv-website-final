@@ -105,10 +105,15 @@ const Projects = () => {
 
 const sectionStyle = {
   padding: '4rem 2rem',
-  backgroundColor: '#111',
+  backgroundImage: 'url("/your-projects-bg.jpg")', // <- dodaj obraz do folderu public
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundAttachment: 'fixed',
   color: 'white',
-  minHeight: '100vh'
+  minHeight: '100vh',
+  backdropFilter: 'blur(8px)'
 };
+
 
 const headingStyle = {
   textAlign: 'center',
@@ -117,12 +122,15 @@ const headingStyle = {
 };
 
 const projectCardStyle = {
-  backgroundColor: '#222',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)', // przezroczysty czarny
   padding: '1.5rem',
   borderRadius: '10px',
   marginBottom: '2rem',
-  boxShadow: '0 0 10px rgba(255,255,255,0.05)'
+  backdropFilter: 'blur(6px)',
+  WebkitBackdropFilter: 'blur(6px)',
+  boxShadow: '0 0 20px rgba(0,0,0,0.3)'
 };
+
 
 const titleRowStyle = {
   display: 'flex',
