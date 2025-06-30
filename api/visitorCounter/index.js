@@ -5,7 +5,8 @@ const counterBlobName = "counter.json";
 const ipLogBlobName = "ips.json";
 
 const getClient = () =>
-  BlobServiceClient.fromConnectionString(process.env.AzureWebJobsStorage);
+  BlobServiceClient.fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
+
 
 const getBlobContent = async (container, blob) => {
   const blockBlobClient = container.getBlockBlobClient(blob);
