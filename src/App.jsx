@@ -45,7 +45,7 @@ function App() {
         <Route
           path="/projects"
           element={
-            <div style={backgroundStyle("/backgrounds/projects.jpg")}>
+            <div style={backgroundStyle("/backgrounds/projects.png")}>
               <Projects />
               <Footer />
             </div>

@@ -1,35 +1,36 @@
 // src/About.jsx
-import React from 'react';
+import React, { useContext } from 'react';
+import { LanguageContext } from './LanguageContext';
+import { translations } from './translations';
 
 const About = () => {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
+
   return (
     <section style={styles.section}>
-      <h2 style={styles.heading}>About Me</h2>
+      <h2 style={styles.heading}>{t.aboutHeading}</h2>
 
       <img
-        src="/michal.jpg" // ← wrzuć plik .jpg z Twoim zdjęciem do folderu public
+        src="/michal.jpg"
         alt="Micheal's profile"
         style={styles.image}
       />
 
-      <p style={styles.text}>
-        Hi! I'm <strong>Micheal</strong>, a Data Science & AI student passionate about cloud computing,
-        simulation, and modern web development. I'm building my career path towards becoming a
-        certified Cloud Engineer and Azure expert. This website is part of that journey 🚀
-      </p>
+      <p style={styles.text}>{t.aboutText}</p>
 
-      <h3 style={styles.subheading}>Skills & Technologies</h3>
+      <h3 style={styles.subheading}>{t.skillsHeading}</h3>
       <ul style={styles.list}>
-        <li>🔹 JavaScript, React, Vite</li>
-        <li>🔹 Python, MATLAB, LaTeX</li>
-        <li>🔹 Azure Static Web Apps, GitHub Actions</li>
-        <li>🔹 Data Analysis, Machine Learning (Random Forest, ODEs)</li>
+        <li>🔹 Java, Python, Azure</li>
+        <li>🔹 JavaFX, React, Vite</li>
+        <li>🔹 Azure Static Web Apps, GitHub Actions (CI/CD), Maven</li>
+        <li>🔹 OOP, Math Modeling, AI (Random Forests, Evolutionary Algorithms)</li>
       </ul>
 
-      <h3 style={styles.subheading}>Certifications</h3>
+      <h3 style={styles.subheading}>{t.certificationsHeading}</h3>
       <ul style={styles.list}>
         <li>✔️ Microsoft Azure Fundamentals (AZ-900)</li>
-        <li>✔️ In progress: AI-900 & AZ-204</li>
+        <li>✔️ IELTS Academic</li>
       </ul>
     </section>
   );
@@ -40,7 +41,7 @@ const styles = {
     padding: '4rem 2rem',
     maxWidth: '800px',
     margin: '0 auto',
-    color: 'white', // ← wcześniej było #333, zmieniamy na jasny
+    color: 'white',
     textAlign: 'center',
   },
   heading: {
@@ -71,9 +72,8 @@ const styles = {
     padding: 0,
     fontSize: '1rem',
     lineHeight: '1.5',
-    color: 'white', // ← również tu
+    color: 'white',
   },
 };
-
 
 export default About;

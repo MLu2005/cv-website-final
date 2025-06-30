@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { LanguageContext } from "./LanguageContext";
+import { translations } from "./translations";
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -17,24 +21,24 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
       if (res.ok) {
-        setStatus("Message sent successfully!");
+        setStatus(t.contactSuccess);
         setFormData({ name: "", email: "", message: "" });
       } else {
-        setStatus("Error sending message.");
+        setStatus(t.contactError);
       }
     } catch {
-      setStatus("Server error.");
+      setStatus(t.contactServerError);
     }
   };
 
   return (
     <div style={wrapperStyle}>
-      <h2>Contact Me</h2>
+      <h2>{t.contactHeading}</h2>
       <form onSubmit={handleSubmit} style={formStyle}>
         <input
           type="text"
           name="name"
-          placeholder="Your Name"
+          placeholder={t.contactName}
           value={formData.name}
           onChange={handleChange}
           style={inputStyle}
@@ -43,7 +47,7 @@ const Contact = () => {
         <input
           type="email"
           name="email"
-          placeholder="Your Email"
+          placeholder={t.contactEmail}
           value={formData.email}
           onChange={handleChange}
           style={inputStyle}
@@ -51,14 +55,14 @@ const Contact = () => {
         />
         <textarea
           name="message"
-          placeholder="Your Message"
+          placeholder={t.contactMessage}
           value={formData.message}
           onChange={handleChange}
           style={textareaStyle}
           rows={6}
           required
         />
-        <button type="submit" style={buttonStyle}>Send</button>
+        <button type="submit" style={buttonStyle}>{t.contactSend}</button>
         {status && <p>{status}</p>}
       </form>
     </div>

@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { LanguageContext } from "./LanguageContext";
+import { translations } from "./translations";
 
 const Hero = () => {
-  const [visits, setVisits] = useState(null); // null = jeszcze nie załadowane
+  const [visits, setVisits] = useState(null);
+  const [copied, setCopied] = useState(false);
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
 
   useEffect(() => {
     fetch("/api/visitorCounter")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Visitor data:", data); // debug
         if (data.visits !== undefined) {
           setVisits(data.visits);
         }
@@ -16,11 +20,17 @@ const Hero = () => {
       .catch((err) => console.error("Failed to load visit count:", err));
   }, []);
 
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("lubinskimichal2005@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div style={{ textAlign: "center", marginTop: "30vh", color: "white" }}>
-      <h1>Hi, I am Micheal and this is my website about me</h1>
+      <h1>{t.heroTitle}</h1>
       <p style={{ marginTop: "1rem", fontSize: "1.2rem" }}>
-        {visits !== null ? `Visits: ${visits}` : "Loading visits..."}
+        {visits !== null ? `${t.visits}: ${visits}` : t.loadingVisits}
       </p>
       <div
         style={{
@@ -31,7 +41,7 @@ const Hero = () => {
         }}
       >
         <a
-          href="https://github.com/twoj-github"
+          href="https://github.com/MLu2005"
           target="_blank"
           rel="noopener noreferrer"
           style={{ color: "white" }}
@@ -39,17 +49,27 @@ const Hero = () => {
           <FaGithub size={30} />
         </a>
         <a
-          href="https://linkedin.com/in/twoj-linkedin"
+          href="https://www.linkedin.com/in/michal-lubinski"
           target="_blank"
           rel="noopener noreferrer"
           style={{ color: "white" }}
         >
           <FaLinkedin size={30} />
         </a>
-        <a href="mailto:twoj.email@gmail.com" style={{ color: "white" }}>
+        <button
+          onClick={handleCopyEmail}
+          style={{
+            background: "none",
+            border: "none",
+            color: "white",
+            cursor: "pointer",
+          }}
+          title={t.copyEmail}
+        >
           <FaEnvelope size={30} />
-        </a>
+        </button>
       </div>
+      {copied && <p style={{ marginTop: "0.5rem", color: "#7fffd4" }}>{t.emailCopied}</p>}
     </div>
   );
 };

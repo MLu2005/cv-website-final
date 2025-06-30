@@ -1,8 +1,11 @@
 // src/Navbar.jsx
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { LanguageContext } from "./LanguageContext";
 
 const Navbar = () => {
+  const { language, toggleLanguage } = useContext(LanguageContext);
+
   return (
     <nav
       style={{
@@ -17,21 +20,18 @@ const Navbar = () => {
         zIndex: 1000,
       }}
     >
-
       <Link
-      to="/"
-      style={{
-      fontSize: "1.25rem",
-      fontWeight: "bold",
-      color: "white",
-      textDecoration: "none",
-      cursor: "pointer",
-      }}
+        to="/"
+        style={{
+          fontSize: "1.25rem",
+          fontWeight: "bold",
+          color: "white",
+          textDecoration: "none",
+          cursor: "pointer",
+        }}
       >
-      Michael
+        Michael
       </Link>
-
-
 
       <ul
         style={{
@@ -45,26 +45,28 @@ const Navbar = () => {
       >
         <li>
           <Link to="/about" style={linkStyle}>
-            About Me
+            {language === "en" ? "About Me" : "O mnie"}
           </Link>
         </li>
         <li>
           <Link to="/projects" style={linkStyle}>
-            Projects
+            {language === "en" ? "Projects" : "Projekty"}
           </Link>
         </li>
         <li>
           <Link to="/contact" style={linkStyle}>
-            Contact
+            {language === "en" ? "Contact" : "Kontakt"}
           </Link>
         </li>
         <li>
           <a href="/cv.pdf" download style={linkStyle}>
-            Download CV
+            {language === "en" ? "Download CV" : "Pobierz CV"}
           </a>
         </li>
         <li>
-          <button style={buttonStyle}>PL/EN</button>
+          <button onClick={toggleLanguage} style={buttonStyle}>
+            {language === "en" ? "PL" : "EN"}
+          </button>
         </li>
       </ul>
     </nav>
